@@ -153,29 +153,6 @@
     margin-top: 1px;
   }
 
-  /* ── Fade Edges ── */
-  .carousel-container { position: relative; }
-
-  .carousel-container::before,
-  .carousel-container::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 15px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .carousel-container::before {
-    left: 0;
-    background: linear-gradient(to right, rgba(255,255,255,1), transparent);
-  }
-
-  .carousel-container::after {
-    right: 0;
-    background: linear-gradient(to left, rgba(255,255,255,1), transparent);
-  }
-
   /* ── Review Count Footer ── */
   .review-count-footer {
     text-align: center;
