@@ -32,3 +32,8 @@ jobs:
           git add google-reviews-widget.html .reviews_archive.json
           git diff --staged --quiet || git commit -m "Auto-refresh Google reviews $(date +'%Y-%m-%d')"
           git push
+
+    permissions:
+      contents: write
+
+    
