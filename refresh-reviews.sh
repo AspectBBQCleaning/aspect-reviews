@@ -56,7 +56,7 @@ fi
 export MIN_STARS TEMP_FILE HTML_FILE ARCHIVE_FILE
 python3 << 'PYEOF'
 import json, sys, re, os
-from datetime import datetime
+from datetime import datetime, timezone
 
 min_stars = int(os.environ.get("MIN_STARS", 4))
 temp_file = os.environ["TEMP_FILE"]
@@ -80,6 +80,7 @@ def map_review(r):
         "rating": r.get("rating", 5),
         "text": text_obj.get("text", "") if isinstance(text_obj, dict) else str(text_obj),
         "relative_time_description": r.get("relativePublishTimeDescription", ""),
+        "publish_time": r.get("publishTime", ""),
         "profile_photo_url": author.get("photoUri", ""),
     }
 
@@ -122,10 +123,14 @@ for r in new_reviews:
         merged.append(r)
         added += 1
     else:
-        # Update the relative_time_description for existing reviews
+        # Refresh mutable fields on the already-archived copy (time, absolute
+        # publish_time, photo) so reviews Google still surfaces gain a precise
+        # timestamp for sorting over successive runs.
         for m in merged:
             if review_key(m) == k and r.get("relative_time_description"):
                 m["relative_time_description"] = r["relative_time_description"]
+                if r.get("publish_time"):
+                    m["publish_time"] = r["publish_time"]
                 if r.get("profile_photo_url"):
                     m["profile_photo_url"] = r["profile_photo_url"]
                 break
@@ -136,6 +141,29 @@ print(f"Total accumulated reviews: {len(merged)}")
 if not merged:
     print("No reviews available. Widget not updated.")
     sys.exit(1)
+
+# ── Sort most-recent-first ──
+# Prefer absolute publish_time (RFC 3339, present on newly fetched reviews);
+# fall back to estimating age from relative_time_description for older archived
+# reviews that predate publish_time capture (e.g. "2 months ago" -> ~60 days).
+def review_sort_key(r):
+    pt = r.get("publish_time") or ""
+    if pt:
+        try:
+            return datetime.fromisoformat(pt.replace("Z", "+00:00")).timestamp()
+        except Exception:
+            pass
+    desc = (r.get("relative_time_description") or "").lower()
+    now = datetime.now(timezone.utc).timestamp()
+    units = {"minute": 60, "hour": 3600, "day": 86400,
+             "week": 604800, "month": 2592000, "year": 31536000}
+    m = re.search(r"(\d+|a|an)\s+(minute|hour|day|week|month|year)", desc)
+    if m:
+        n = 1 if m.group(1) in ("a", "an") else int(m.group(1))
+        return now - n * units.get(m.group(2), 0)
+    return now  # "in the last week" / unknown -> treat as most recent
+
+merged.sort(key=review_sort_key, reverse=True)
 
 # ── Save archive ──
 archive_data = {
@@ -170,6 +198,22 @@ html = html.replace(marker, replacement, 1)
 
 with open(html_file, "w") as f:
     f.write(html)
+
+# ── Also update mobile widget if it exists ──
+mobile_file = os.path.join(os.path.dirname(html_file), "google-reviews-widget-mobile.html")
+if os.path.exists(mobile_file):
+    with open(mobile_file, "r") as f:
+        mobile_html = f.read()
+    mobile_html = re.sub(
+        r'// __CACHED_REVIEWS_DATA__\n\s*const CACHED_DATA = [\s\S]*?;\n',
+        marker + '\n',
+        mobile_html,
+        count=1
+    )
+    mobile_html = mobile_html.replace(marker, replacement, 1)
+    with open(mobile_file, "w") as f:
+        f.write(mobile_html)
+    print("Mobile widget also updated!")
 
 print(f"\nWidget updated successfully!")
 print(f"  Total reviews:  {len(merged)}")
