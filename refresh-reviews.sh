@@ -1,226 +1,170 @@
 #!/bin/bash
 # ──────────────────────────────────────────────
 # refresh-reviews.sh
-# Fetches your Google reviews and injects them
-# into google-reviews-widget.html
+# Pulls ALL Google reviews via the Google Business Profile API (v4)
+# and injects them (newest-first) into the widget HTML files.
 #
-# ACCUMULATES reviews over time — each run keeps
-# existing reviews and adds any new ones it finds.
+# Why the Business Profile API and not the Places API:
+#   The Places API returns only 5 reviews, ranked by relevance (not recency),
+#   so genuinely recent reviews never reach the widget. The Business Profile
+#   API returns the full review history with absolute publish dates.
 #
-# Usage:
-#   cd /path/to/folder
-#   bash refresh-reviews.sh
-#
-# Schedule daily (optional):
-#   crontab -e
-#   0 6 * * * cd /path/to/folder && bash refresh-reviews.sh
+# Auth (OAuth2 refresh-token flow) — set as GitHub Actions secrets:
+#   GBP_CLIENT_ID, GBP_CLIENT_SECRET, GBP_REFRESH_TOKEN
+# Non-secret config (defaults below; override via env if the profile moves):
+#   GBP_ACCOUNT_ID, GBP_LOCATION_ID, GBP_QUOTA_PROJECT, MIN_STARS
 # ──────────────────────────────────────────────
 
-# Uses env vars if set (for GitHub Actions), otherwise falls back to defaults
-API_KEY="${GOOGLE_API_KEY:?GOOGLE_API_KEY is required — set it as a GitHub Actions secret or a local env var. Do not hardcode keys in this file (public repo).}"
-PLACE_ID="${GOOGLE_PLACE_ID:-ChIJfbFf_7K2aUwRNH0xcWaMrD0}"
-MIN_STARS=4
+CLIENT_ID="${GBP_CLIENT_ID:?GBP_CLIENT_ID is required (set it as a GitHub Actions secret)}"
+CLIENT_SECRET="${GBP_CLIENT_SECRET:?GBP_CLIENT_SECRET is required (set it as a GitHub Actions secret)}"
+REFRESH_TOKEN="${GBP_REFRESH_TOKEN:?GBP_REFRESH_TOKEN is required (set it as a GitHub Actions secret)}"
+ACCOUNT_ID="${GBP_ACCOUNT_ID:-106811548450724929062}"
+LOCATION_ID="${GBP_LOCATION_ID:-4068395454767005433}"
+QUOTA_PROJECT="${GBP_QUOTA_PROJECT:-aspect-admin-board}"
+MIN_STARS="${MIN_STARS:-4}"
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 HTML_FILE="$SCRIPT_DIR/google-reviews-widget.html"
-TEMP_FILE="$SCRIPT_DIR/.reviews_temp.json"
 ARCHIVE_FILE="$SCRIPT_DIR/.reviews_archive.json"
+PAGE_DIR="$(mktemp -d)"
+trap 'rm -rf "$PAGE_DIR"' EXIT
 
-echo "Fetching reviews from Google Places API (New)..."
+# ── 1. Mint an access token (review-only scope) from the refresh token ──
+echo "Minting access token (business.manage)..."
+ACCESS_TOKEN=$(curl -s https://oauth2.googleapis.com/token \
+  -d client_id="$CLIENT_ID" \
+  -d client_secret="$CLIENT_SECRET" \
+  -d refresh_token="$REFRESH_TOKEN" \
+  -d grant_type=refresh_token \
+  -d scope="https://www.googleapis.com/auth/business.manage" \
+  | python3 -c "import json,sys; print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
 
-# Fetch place details using the NEW Places API
-curl -s -X GET \
-  "https://places.googleapis.com/v1/places/${PLACE_ID}?fields=reviews,rating,userRatingCount&key=${API_KEY}" \
-  -H "Content-Type: application/json" \
-  -o "$TEMP_FILE"
-
-# Check for errors
-HAS_ERROR=$(python3 -c "
-import json
-d=json.load(open('$TEMP_FILE'))
-print('yes' if 'error' in d else 'no')
-" 2>/dev/null)
-
-if [ "$HAS_ERROR" = "yes" ]; then
-  ERROR_MSG=$(python3 -c "
-import json
-d=json.load(open('$TEMP_FILE'))
-e=d.get('error',{})
-print(f\"{e.get('status','UNKNOWN')} — {e.get('message','Unknown error')}\")
-" 2>/dev/null)
-  echo "Error: $ERROR_MSG"
-  rm -f "$TEMP_FILE"
+if [ -z "$ACCESS_TOKEN" ]; then
+  echo "ERROR: could not mint an access token. The refresh token may have been"
+  echo "revoked or expired — re-run the one-time auth to generate a new one."
   exit 1
 fi
 
-# Use Python3 to process, accumulate, and inject
-export MIN_STARS TEMP_FILE HTML_FILE ARCHIVE_FILE
+# ── 2. Page through every review (newest first) ──
+echo "Fetching reviews from Business Profile API..."
+token=""
+page=0
+while :; do
+  page=$((page + 1))
+  url="https://mybusiness.googleapis.com/v4/accounts/${ACCOUNT_ID}/locations/${LOCATION_ID}/reviews?pageSize=50&orderBy=updateTime%20desc"
+  [ -n "$token" ] && url="${url}&pageToken=${token}"
+  curl -s "$url" \
+    -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+    -H "x-goog-user-project: ${QUOTA_PROJECT}" \
+    -o "${PAGE_DIR}/page_${page}.json"
+  # bail out loudly on an API error rather than overwriting good data with junk
+  ERR=$(python3 -c "import json;d=json.load(open('${PAGE_DIR}/page_${page}.json'));print(d.get('error',{}).get('message','')) if 'error' in d else print('')" 2>/dev/null)
+  if [ -n "$ERR" ]; then echo "ERROR from API on page ${page}: ${ERR}"; exit 1; fi
+  token=$(python3 -c "import json;print(json.load(open('${PAGE_DIR}/page_${page}.json')).get('nextPageToken',''))" 2>/dev/null)
+  if [ -z "$token" ] || [ "$page" -ge 40 ]; then break; fi
+done
+echo "Fetched ${page} page(s)."
+
+# ── 3. Process + inject ──
+export PAGE_DIR HTML_FILE ARCHIVE_FILE MIN_STARS
 python3 << 'PYEOF'
-import json, sys, re, os
+import json, os, re, glob, sys
 from datetime import datetime, timezone
 
-min_stars = int(os.environ.get("MIN_STARS", 4))
-temp_file = os.environ["TEMP_FILE"]
-html_file = os.environ["HTML_FILE"]
-archive_file = os.environ["ARCHIVE_FILE"]
+page_dir   = os.environ["PAGE_DIR"]
+html_file  = os.environ["HTML_FILE"]
+archive    = os.environ["ARCHIVE_FILE"]
+min_stars  = int(os.environ.get("MIN_STARS", 4))
 
-with open(temp_file) as f:
-    data = json.load(f)
+STAR = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5}
 
-# ── Parse new API response ──
-all_reviews = data.get("reviews", [])
-overall_rating = data.get("rating")
-total_ratings = data.get("userRatingCount")
+def clean_comment(c):
+    if not c:
+        return ""
+    # Google bilingual format: "(Translated by Google) <en>\n\n(Original) <orig>"
+    if "(Translated by Google)" in c:
+        m = re.search(r"\(Translated by Google\)\s*(.*?)\s*\(Original\)", c, re.S)
+        if m:
+            return m.group(1).strip()
+    return c.strip()
 
-# Map from new API format
-def map_review(r):
-    author = r.get("authorAttribution", {})
-    text_obj = r.get("text", {})
-    return {
-        "author_name": author.get("displayName", "Google User"),
-        "rating": r.get("rating", 5),
-        "text": text_obj.get("text", "") if isinstance(text_obj, dict) else str(text_obj),
-        "relative_time_description": r.get("relativePublishTimeDescription", ""),
-        "publish_time": r.get("publishTime", ""),
-        "profile_photo_url": author.get("photoUri", ""),
-    }
+def rel_label(createtime):
+    if not createtime:
+        return ""
+    dt = datetime.fromisoformat(createtime.replace("Z", "+00:00"))
+    days = (datetime.now(timezone.utc) - dt).days
+    if days <= 1:   return "a day ago"
+    if days < 7:    return f"{days} days ago"
+    if days < 14:   return "a week ago"
+    if days < 31:   return f"{days // 7} weeks ago"
+    if days < 60:   return "a month ago"
+    if days < 365:  return f"{days // 30} months ago"
+    if days < 730:  return "a year ago"
+    return f"{days // 365} years ago"
 
-new_reviews = [map_review(r) for r in all_reviews if r.get("rating", 0) >= min_stars]
-print(f"Fetched {len(all_reviews)} reviews from API, {len(new_reviews)} with {min_stars}+ stars.")
+# collect pages in order
+pages = sorted(glob.glob(os.path.join(page_dir, "page_*.json")),
+               key=lambda p: int(re.search(r"page_(\d+)\.json", p).group(1)))
+raw, avg, total = [], None, None
+for i, p in enumerate(pages):
+    d = json.load(open(p))
+    if i == 0:
+        avg, total = d.get("averageRating"), d.get("totalReviewCount")
+    raw.extend(d.get("reviews", []))
+print(f"Pulled {len(raw)} reviews (averageRating={avg}, totalReviewCount={total}).")
 
-# ── Load existing archive ──
-existing = []
-if os.path.exists(archive_file):
+reviews = []
+for r in raw:
+    rating = STAR.get(r.get("starRating"), 0)
+    text = clean_comment(r.get("comment", ""))
+    if rating < min_stars or not text:
+        continue
+    ct = r.get("createTime", "")
+    reviews.append({
+        "author_name": (r.get("reviewer") or {}).get("displayName", "Google User"),
+        "rating": rating,
+        "text": text,
+        "relative_time_description": rel_label(ct),
+        "publish_time": ct,
+        "profile_photo_url": (r.get("reviewer") or {}).get("profilePhotoUrl", ""),
+    })
+reviews.sort(key=lambda r: r["publish_time"], reverse=True)
+print(f"{len(reviews)} reviews with {min_stars}+ stars and text.")
+
+# safety: never overwrite a healthy archive with a suspiciously small pull
+prev = 0
+if os.path.exists(archive):
     try:
-        with open(archive_file) as f:
-            archive = json.load(f)
-            existing = archive.get("reviews", [])
-        print(f"Loaded {len(existing)} existing reviews from archive.")
-    except:
-        print("Could not read archive, starting fresh.")
-
-# ── Merge: deduplicate by author_name + first 80 chars of text ──
-def review_key(r):
-    text_snippet = (r.get("text", "") or "")[:80].strip().lower()
-    name = (r.get("author_name", "") or "").strip().lower()
-    return name + "|" + text_snippet
-
-seen = {}
-merged = []
-
-# Existing reviews first (preserve order)
-for r in existing:
-    k = review_key(r)
-    if k not in seen:
-        seen[k] = True
-        merged.append(r)
-
-# Add any new reviews not already in archive
-added = 0
-for r in new_reviews:
-    k = review_key(r)
-    if k not in seen:
-        seen[k] = True
-        merged.append(r)
-        added += 1
-    else:
-        # Refresh mutable fields on the already-archived copy (time, absolute
-        # publish_time, photo) so reviews Google still surfaces gain a precise
-        # timestamp for sorting over successive runs.
-        for m in merged:
-            if review_key(m) == k and r.get("relative_time_description"):
-                m["relative_time_description"] = r["relative_time_description"]
-                if r.get("publish_time"):
-                    m["publish_time"] = r["publish_time"]
-                if r.get("profile_photo_url"):
-                    m["profile_photo_url"] = r["profile_photo_url"]
-                break
-
-print(f"New reviews added: {added}")
-print(f"Total accumulated reviews: {len(merged)}")
-
-if not merged:
-    print("No reviews available. Widget not updated.")
+        prev = len(json.load(open(archive)).get("reviews", []))
+    except Exception:
+        prev = 0
+if not reviews:
+    print("No reviews returned — leaving existing widget data untouched.")
+    sys.exit(1)
+if prev and len(reviews) < prev * 0.5:
+    print(f"Pulled only {len(reviews)} vs {prev} archived — suspiciously low, aborting to protect data.")
     sys.exit(1)
 
-# ── Sort most-recent-first ──
-# Prefer absolute publish_time (RFC 3339, present on newly fetched reviews);
-# fall back to estimating age from relative_time_description for older archived
-# reviews that predate publish_time capture (e.g. "2 months ago" -> ~60 days).
-def review_sort_key(r):
-    pt = r.get("publish_time") or ""
-    if pt:
-        try:
-            return datetime.fromisoformat(pt.replace("Z", "+00:00")).timestamp()
-        except Exception:
-            pass
-    desc = (r.get("relative_time_description") or "").lower()
-    now = datetime.now(timezone.utc).timestamp()
-    units = {"minute": 60, "hour": 3600, "day": 86400,
-             "week": 604800, "month": 2592000, "year": 31536000}
-    m = re.search(r"(\d+|a|an)\s+(minute|hour|day|week|month|year)", desc)
-    if m:
-        n = 1 if m.group(1) in ("a", "an") else int(m.group(1))
-        return now - n * units.get(m.group(2), 0)
-    return now  # "in the last week" / unknown -> treat as most recent
-
-merged.sort(key=review_sort_key, reverse=True)
-
-# ── Save archive ──
-archive_data = {
-    "reviews": merged,
-    "overall_rating": overall_rating,
-    "total_ratings": total_ratings,
+data = {
+    "reviews": reviews,
+    "overall_rating": round(avg, 1) if isinstance(avg, (int, float)) else 4.9,
+    "total_ratings": total,
     "fetched_at": datetime.now().isoformat(),
 }
+json.dump(data, open(archive, "w"), indent=2, ensure_ascii=False)
 
-with open(archive_file, "w") as f:
-    json.dump(archive_data, f, indent=2, ensure_ascii=False)
-
-# ── Inject into HTML ──
-cached_json = json.dumps(archive_data, indent=2, ensure_ascii=False)
-
-with open(html_file, "r") as f:
-    html = f.read()
-
+# inject into the widget(s)
 marker = "// __CACHED_REVIEWS_DATA__"
-replacement = f"{marker}\n  const CACHED_DATA = {cached_json};"
+replacement = f"{marker}\n  const CACHED_DATA = {json.dumps(data, indent=2, ensure_ascii=False)};"
+targets = [html_file, os.path.join(os.path.dirname(html_file), "google-reviews-widget-mobile.html")]
+for f in targets:
+    if not os.path.exists(f):
+        continue
+    html = open(f).read()
+    html = re.sub(r'// __CACHED_REVIEWS_DATA__\n\s*const CACHED_DATA = [\s\S]*?;\n', marker + '\n', html, count=1)
+    html = html.replace(marker, replacement, 1)
+    open(f, "w").write(html)
+    print(f"Injected -> {os.path.basename(f)}")
 
-# Remove any previous cached data
-html = re.sub(
-    r'// __CACHED_REVIEWS_DATA__\n\s*const CACHED_DATA = [\s\S]*?;\n',
-    marker + '\n',
-    html,
-    count=1
-)
-
-# Inject fresh data
-html = html.replace(marker, replacement, 1)
-
-with open(html_file, "w") as f:
-    f.write(html)
-
-# ── Also update mobile widget if it exists ──
-mobile_file = os.path.join(os.path.dirname(html_file), "google-reviews-widget-mobile.html")
-if os.path.exists(mobile_file):
-    with open(mobile_file, "r") as f:
-        mobile_html = f.read()
-    mobile_html = re.sub(
-        r'// __CACHED_REVIEWS_DATA__\n\s*const CACHED_DATA = [\s\S]*?;\n',
-        marker + '\n',
-        mobile_html,
-        count=1
-    )
-    mobile_html = mobile_html.replace(marker, replacement, 1)
-    with open(mobile_file, "w") as f:
-        f.write(mobile_html)
-    print("Mobile widget also updated!")
-
-print(f"\nWidget updated successfully!")
-print(f"  Total reviews:  {len(merged)}")
-print(f"  Overall rating: {overall_rating}")
-print(f"  Last fetched:   {archive_data['fetched_at']}")
-print(f"  File: {html_file}")
+print(f"Done. {len(reviews)} reviews, newest {reviews[0]['publish_time'][:10]}, rating {data['overall_rating']}.")
 PYEOF
-
-# Clean up temp
-rm -f "$TEMP_FILE"

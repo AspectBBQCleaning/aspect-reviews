@@ -21,15 +21,16 @@ jobs:
 
       - name: Fetch reviews and update widget
         env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+          GBP_CLIENT_ID: ${{ secrets.GBP_CLIENT_ID }}
+          GBP_CLIENT_SECRET: ${{ secrets.GBP_CLIENT_SECRET }}
+          GBP_REFRESH_TOKEN: ${{ secrets.GBP_REFRESH_TOKEN }}
         run: bash refresh-reviews.sh
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add google-reviews-widget.html .reviews_archive.json
+          git add google-reviews-widget.html google-reviews-widget-mobile.html .reviews_archive.json
           git diff --staged --quiet || git commit -m "Auto-refresh Google reviews $(date +'%Y-%m-%d')"
           git push
 
