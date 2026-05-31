@@ -17,7 +17,7 @@
 # ──────────────────────────────────────────────
 
 # Uses env vars if set (for GitHub Actions), otherwise falls back to defaults
-API_KEY="${GOOGLE_API_KEY:-AIzaSyAyznTjMMCkTjxrd6kDAO_lKLv66L15L8U}"
+API_KEY="${GOOGLE_API_KEY:?GOOGLE_API_KEY is required — set it as a GitHub Actions secret or a local env var. Do not hardcode keys in this file (public repo).}"
 PLACE_ID="${GOOGLE_PLACE_ID:-ChIJfbFf_7K2aUwRNH0xcWaMrD0}"
 MIN_STARS=4
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
