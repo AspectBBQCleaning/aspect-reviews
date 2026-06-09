@@ -1,10 +1,42 @@
 {
   "reviews": [
     {
+      "author_name": "judy mckinnon",
+      "rating": 5,
+      "text": "Nathan did an amazing job and worked tirelessly to clean the BBQ top to bottom!",
+      "relative_time_description": "a day ago",
+      "publish_time": "2026-06-09T12:33:51.347417Z",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJ6Vww6P0UHZR0KTnzrd8wBOuFzWaIhZM_NclRXjhhzjXVKBQ=s120-c-rp-mo-br100"
+    },
+    {
+      "author_name": "louisa",
+      "rating": 5,
+      "text": "Perfectly cleaned. Professional and kind service man. Highly recommend.",
+      "relative_time_description": "a day ago",
+      "publish_time": "2026-06-08T19:49:21.857072Z",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLIZc5FeWsUiLsZZ-42gVmVAaxxMO7th8w9OBGdusiI40OYCA=s120-c-rp-mo-ba2-br100"
+    },
+    {
+      "author_name": "Alyson Stickle",
+      "rating": 5,
+      "text": "Fayez did a great and thorough  job, our bbq looks brand new!",
+      "relative_time_description": "a day ago",
+      "publish_time": "2026-06-08T17:43:08.944164Z",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocINiwXuOSclvlVM8p1wt7IqoeseKTgkiuaaBa87dpG9zDfrbA=s120-c-rp-mo-br100"
+    },
+    {
+      "author_name": "Sandy Ozols",
+      "rating": 5,
+      "text": "Hi guys!  You cleaned our bbq today in Bala and did a fabulous job!  Arrived promptly at 8 (I still had my jammies on).\nThe grills are gorgeous, the plates are perfect, the sides are spotless.\nThe young fellow who did the work was polite and friendly.\nVery well done. Thank you guys!",
+      "relative_time_description": "a day ago",
+      "publish_time": "2026-06-08T16:10:01.100839Z",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLkYRQAQ7RJj6Y0QmwDVn1ejrFzup6b1P_YsnCL3-gINZnXRA=s120-c-rp-mo-br100"
+    },
+    {
       "author_name": "M W",
       "rating": 5,
       "text": "From start to finish Aspect were a pleasure to deal with. Noah was professional and no question was too much trouble. The end product was beyond expectations. “Would recommend”. Thank you!",
-      "relative_time_description": "a day ago",
+      "relative_time_description": "2 days ago",
       "publish_time": "2026-06-06T15:48:09.263488Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK7fUTzv16-8QuPG-Dyt-KTBHVhc78njtBo1HP4cuvZGZgV8w=s120-c-rp-mo-ba2-br100"
     },
@@ -12,7 +44,7 @@
       "author_name": "Milly Yerbury",
       "rating": 5,
       "text": "Fayez was awesome!! Worked so hard, bbq came out so clean!",
-      "relative_time_description": "2 days ago",
+      "relative_time_description": "3 days ago",
       "publish_time": "2026-06-05T20:59:43.101216Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKzBq23wax3jauSt9P2PPfGSmZTg55JPTU1y9KoD4S_iGeqN7M=s120-c-rp-mo-br100"
     },
@@ -20,7 +52,7 @@
       "author_name": "Robert Knowles",
       "rating": 5,
       "text": "Amazing service from a great kid! Professional and hard working in the heat for 3 hours. The BBQ looks and works like brand new!",
-      "relative_time_description": "2 days ago",
+      "relative_time_description": "3 days ago",
       "publish_time": "2026-06-05T17:49:37.067869Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIFGG-mVwu10dbexZ9ac_ULDxUu2I65mhRAxoBI6GPPlX8XqA=s120-c-rp-mo-br100"
     },
@@ -28,7 +60,7 @@
       "author_name": "Erin B",
       "rating": 5,
       "text": "I really appreciate the team at Aspect making every part of the process easy and the service more than met my expectations l. I am looking forward to using them again in the future.",
-      "relative_time_description": "2 days ago",
+      "relative_time_description": "3 days ago",
       "publish_time": "2026-06-05T14:51:16.452772Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocI4Z_AarkoXNPZofAApT8Ksq2kzny7HVgakKNqS4-J2l6peOg=s120-c-rp-mo-br100"
     },
@@ -36,7 +68,7 @@
       "author_name": "Christine Crooks",
       "rating": 5,
       "text": "Fayez was amazing. Very informative. Step by step instructions. Was very supportive of our request for the area for the cleaning. Even cleaned out our bird bath  extra points for that. Barbecue is awesome 👏",
-      "relative_time_description": "3 days ago",
+      "relative_time_description": "4 days ago",
       "publish_time": "2026-06-04T19:15:20.416971Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLyJaX39FJbDcaZj-6LUJsb3l3R2t9b0Tnjqp_suBFrhCX3lA=s120-c-rp-mo-br100"
     },
@@ -44,7 +76,7 @@
       "author_name": "Jason Reyes",
       "rating": 5,
       "text": "Had Will come in from Aspect BBQ and did a tremendous job. Great feedback how to maintain going forward. Spent good time refreshing and putting the extra elbow grease and TLC. Highly recommended. Derrick",
-      "relative_time_description": "4 days ago",
+      "relative_time_description": "5 days ago",
       "publish_time": "2026-06-03T18:41:52.273035Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVyzquViYsg-T0GSdMAvy0UZ4kE0XMPaROVV6KnYB_8XncmIXca9Q=s120-c-rp-mo-br100"
     },
@@ -52,7 +84,7 @@
       "author_name": "Mark Castell",
       "rating": 5,
       "text": "Fayez was very professional and did an exceptional job.  Showed up on time and cleaned up after himself fully.\n\nMy Napoleon BBQ looks brand new and I'm ready for another summer with a fresh grill.\n\nWill use again in the future!",
-      "relative_time_description": "4 days ago",
+      "relative_time_description": "5 days ago",
       "publish_time": "2026-06-03T17:23:29.813474Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWIHTtCEsBOig8nzbxp1szadgW90IViaeXT0bz9y63uR_rChmyGrg=s120-c-rp-mo-br100"
     },
@@ -60,7 +92,7 @@
       "author_name": "Klaun Miller",
       "rating": 5,
       "text": "It's not cheap. Very expensive for 2.5 hours of work. That said, the bbq looks almost new. Fayez was very professional and friendly. Would highly recommend with the caveat that it's not cheap.",
-      "relative_time_description": "5 days ago",
+      "relative_time_description": "6 days ago",
       "publish_time": "2026-06-02T22:09:42.258058Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWkzqA0W9m2O6QKsWCA7PCuIqeaFSFa-zQ9mzg39fba2LAWjlWx=s120-c-rp-mo-ba2-br100"
     },
@@ -212,7 +244,7 @@
       "author_name": "Carlos Warth",
       "rating": 5,
       "text": "Jacob made the cleaning for us today! I regret not doing it before. His work is amazing, and they know what they are doing. I got now a brand new bbq! Very happy with the services. Price also very reasonable. Thank you!!",
-      "relative_time_description": "2 weeks ago",
+      "relative_time_description": "3 weeks ago",
       "publish_time": "2026-05-18T19:55:49.465847Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUARgjkXcIgJiBUR_Z1Iskb4hmIRG01e0eQbUBLcg97uAPIFPNV=s120-c-rp-mo-br100"
     },
@@ -276,7 +308,7 @@
       "author_name": "Chloe Russell",
       "rating": 5,
       "text": "Great service, would recommend.",
-      "relative_time_description": "6 months ago",
+      "relative_time_description": "7 months ago",
       "publish_time": "2025-11-10T21:54:37.057313Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjV1HXkHdnYRqfc0FaBpOjypo4Ctxt5XDA2r1aYjr7lAiaG7bxk3BA=s120-c-rp-mo-br100"
     },
@@ -310,7 +342,7 @@
       "text": "Highly recommended! Jacob did an excellent job cleaning my BBQ—it looks amazing. He really took the time and put in the effort to make sure everything was done right. I used their service last year and was so impressed that I came back again this year. Consistently great results and fantastic service!",
       "relative_time_description": "8 months ago",
       "publish_time": "2025-09-19T11:00:37.146898Z",
-      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUKuxZY6fKoYAsKSQqWpJL-VQce6CrZbetZuEndfm0C4VJpC3E=s120-c-rp-mo-br100"
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUhnQ-lv0tJW-wqf8u6MzhKsJm1wmwd7f-te_Wadh__omdPu6E=s120-c-rp-mo-br100"
     },
     {
       "author_name": "Marnie Maclachlan",
@@ -324,7 +356,7 @@
       "author_name": "Maureen Sauve",
       "rating": 5,
       "text": "Amazing job!",
-      "relative_time_description": "8 months ago",
+      "relative_time_description": "9 months ago",
       "publish_time": "2025-09-12T02:42:23.779927Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocISuAWzVZb1P_1YBKN4i2S9ZnuRU-DWN3vzCouU8trg79PvrA=s120-c-rp-mo-br100"
     },
@@ -332,7 +364,7 @@
       "author_name": "Hilda Valentinuzzi",
       "rating": 5,
       "text": "We were lucky to have the owner and founder of the business clean our bbq.\nJacob is very professional and efficient.\nTook his time to do an amazing job .\nWe highly recommend him.\nThank you",
-      "relative_time_description": "8 months ago",
+      "relative_time_description": "9 months ago",
       "publish_time": "2025-09-11T21:32:16.811744Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWOy0nFOmKQ8pjU0TobrAelEojEihr2x8XBNex2skeGUWnKVZNI=s120-c-rp-mo-br100"
     },
@@ -508,7 +540,7 @@
       "author_name": "Scott Mills",
       "rating": 5,
       "text": "Fahd came to clean our BBQ on Hamilton East Mountain. It was very dirty! He worked very hard and made a 15yr old BBQ like new again. Thank you Fahd. If you took before and after pics send them to me and I will post them on your review! (Only have a video of after). Very happy with the work.",
-      "relative_time_description": "9 months ago",
+      "relative_time_description": "10 months ago",
       "publish_time": "2025-08-12T23:23:18.956202Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXrQC54-DsYJ3diZOEVBFCxvj4cgdY37wHdPik1o-spGWshQYY0_Q=s120-c-rp-mo-ba2-br100"
     },
@@ -516,7 +548,7 @@
       "author_name": "Haris I (Harry)",
       "rating": 5,
       "text": "Simply put …. Excellent Job Christian young man.Keep up the good work with same dedication , commitment and honesty and you guys will go a long way for sure\n\nA very thorough cleaning , the grill is just looking like spotless …. Very punctual, organized , tidy and neatly done\n\nKudos to whole team at Aspect Home Services ….. I will certainly use you guys in two years time again 👍🏽\n\nKeep up the good work",
-      "relative_time_description": "9 months ago",
+      "relative_time_description": "10 months ago",
       "publish_time": "2025-08-12T19:45:09.736710Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKvH3T-9Yewsyn86kjt2cohO0lPbsUMuLO7rgsHfsnn2Azw=s120-c-rp-mo-ba4-br100"
     },
@@ -524,7 +556,7 @@
       "author_name": "Pam Baxter",
       "rating": 5,
       "text": "Absolutely an amazing job!!! Great guys to work with!!! Will absolutely have them back!",
-      "relative_time_description": "9 months ago",
+      "relative_time_description": "10 months ago",
       "publish_time": "2025-08-12T18:27:01.799330Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocK7-UBJDEnjXEmAYJWBSFYYG2WifqzkIdsE6W-Oyv_4Guy5Qgi7=s120-c-rp-mo-ba2-br100"
     },
@@ -812,7 +844,7 @@
       "author_name": "Shelly Ramey",
       "rating": 5,
       "text": "Had Aspect BBQ Cleaning at my place the other day.  Would definitely recommend them if you need to have your BBQ cleaned.   They did an awesome job!!",
-      "relative_time_description": "10 months ago",
+      "relative_time_description": "11 months ago",
       "publish_time": "2025-07-14T00:12:50.939012Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIpPNyqj6PmhcfNoWtRXUg-nzDJJKA0GLdxoi1D0JZbEY93qA=s120-c-rp-mo-br100"
     },
@@ -1388,7 +1420,7 @@
       "author_name": "Lisa Puersten",
       "rating": 5,
       "text": "Very pleased with the whole service! I booked the BBQ cleaning as a surprise for my husband's birthday & he was very impressed with the work! Brodin did a great job, was polite, & a pleasure to deal with. Would definitely recommend Aspect & love that they are local!",
-      "relative_time_description": "11 months ago",
+      "relative_time_description": "12 months ago",
       "publish_time": "2025-06-13T22:27:30.685498Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUvGnK9Lt4aFd4VySM9aas9_zEUFE9Jb4aLfdksVoR-xAo-dkt0jQ=s120-c-rp-mo-ba4-br100"
     },
@@ -1396,7 +1428,7 @@
       "author_name": "Danny Scruton",
       "rating": 5,
       "text": "Work was done well and in a timely fashion. Highly recommend Aspect Services.",
-      "relative_time_description": "11 months ago",
+      "relative_time_description": "12 months ago",
       "publish_time": "2025-06-13T22:26:00.727978Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJW-rpweI5YIoKmL2v0H3bv1uQwsbwpxlzBQ0kW84wZaYyJ2g=s120-c-rp-mo-ba2-br100"
     },
@@ -1404,7 +1436,7 @@
       "author_name": "Maxine",
       "rating": 4,
       "text": "Richard did a great job. Ty!",
-      "relative_time_description": "11 months ago",
+      "relative_time_description": "12 months ago",
       "publish_time": "2025-06-13T17:44:18.945194Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKJ2cJkXL__CHUYLWvow8Io3PG32ngU4gho2Hq9qwBEgE-dAw=s120-c-rp-mo-ba2-br100"
     },
@@ -1412,7 +1444,7 @@
       "author_name": "Sharon Cummins",
       "rating": 5,
       "text": "Did the best he could - was early - cleaned up after himself.\nThank You Ethan!",
-      "relative_time_description": "11 months ago",
+      "relative_time_description": "12 months ago",
       "publish_time": "2025-06-13T17:03:05.780638Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJEGoJzuNTYqUHpkwReZdJFzZV7IQlIyo4rmJAUgRX4jDv6aQ=s120-c-rp-mo-br100"
     },
@@ -1420,7 +1452,7 @@
       "author_name": "Stephen Tihal",
       "rating": 5,
       "text": "Like most, I held off on hiring someone to clean our BBQ until the last possible minute. After seeing an IG story about this student run company, I figured it was worth a try.\n\nAspect was quick to respond and open with communication throughout the process. Fran was friendly and efficient, and talked us through trouble areas with the cleaning. He also suggested replacement grills and items that would extend the life of our grill. Would absolutely recommend, and will be hiring again…hopefully before the grill catches fire again!",
-      "relative_time_description": "11 months ago",
+      "relative_time_description": "12 months ago",
       "publish_time": "2025-06-13T15:01:33.638955Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIqpBIU0B9vawcNlvNEWg2N-zVXVEtFmab6tClqdGWlwkphrkA4=s120-c-rp-mo-ba3-br100"
     },
@@ -1524,7 +1556,7 @@
       "author_name": "Carol Potvin",
       "rating": 5,
       "text": "I was very happy with the BBQ cleaning.  Vincent was so friendly and explained each step.  BBQ looks great.  Highly recommend!",
-      "relative_time_description": "12 months ago",
+      "relative_time_description": "a year ago",
       "publish_time": "2025-06-09T00:40:31.835736Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocL8kH1JU0GHW-11VF-oCIFurUJuKjQIWWONNGjPRsAlUpZitw=s120-c-rp-mo-br100"
     },
@@ -1532,7 +1564,7 @@
       "author_name": "Jenn Livingstone",
       "rating": 5,
       "text": "They were on time and did an amazing job of cleaning out BBQ.",
-      "relative_time_description": "12 months ago",
+      "relative_time_description": "a year ago",
       "publish_time": "2025-06-08T18:21:14.903236Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIjQvHmqPRQB9YhSv1efZhE4ge9223-GRAsP2UomERGVjlD7Q=s120-c-rp-mo-br100"
     },
@@ -1540,7 +1572,7 @@
       "author_name": "rosemary rawlinson",
       "rating": 5,
       "text": "Very happy with our first experience with Aspect.  Francisco did a great job with our BBQ.  Would definitely recommend Aspect.",
-      "relative_time_description": "12 months ago",
+      "relative_time_description": "a year ago",
       "publish_time": "2025-06-08T17:46:54.348888Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIH03H8twIr4-7pXrspyjsBP545ndhiI0mA7-jct1QA6nhxkw=s120-c-rp-mo-br100"
     },
@@ -3460,7 +3492,7 @@
       "author_name": "Brenda Quallo",
       "rating": 5,
       "text": "This is the 2nd time we have used this business and we have recommended it to everyone in our family as well as our friends. We are busy and need things around our home clean, beautiful and ready to go! The bbq is tedious and time consuming for us to keep up so this service was the answer. Within less than 4 hours Jake took our bbq from dirty and smelly to clean and like brand new!! We can now have our weekend bbq without any concern when opening the lid to our “ like new” bbq. We were also given numerous tips to polishing the outside to help keep it looking like new.\nAnother service we used is his power washing. The front and back of our country property is impossible to keep free of farmers dust, pollen and regular day to day dirt. Thanks  to Jake our home was left like the day we moved in! We can relax this weekend knowing everything is spotless. Thank you thank you thank you! Your prices are so good too!",
-      "relative_time_description": "2 years ago",
+      "relative_time_description": "3 years ago",
       "publish_time": "2023-06-10T02:40:08.305948Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJ-9KtvhhTLmD56FAKQXFGvvPtjVuO2Ra_NdFuzJJEyn9Wkgg=s120-c-rp-mo-ba2-br100"
     },
@@ -3498,6 +3530,6 @@
     }
   ],
   "overall_rating": 4.9,
-  "total_ratings": 475,
-  "fetched_at": "2026-06-08T14:40:53.744535"
+  "total_ratings": 479,
+  "fetched_at": "2026-06-09T13:34:52.929839"
 }
