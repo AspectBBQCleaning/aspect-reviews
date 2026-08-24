@@ -52,7 +52,7 @@
       "author_name": "Christina Kee",
       "rating": 5,
       "text": "Clay did an excellent job. He was professional and courteous.",
-      "relative_time_description": "4 weeks ago",
+      "relative_time_description": "a month ago",
       "publish_time": "2026-07-23T17:01:12.621940Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIA_yJXQr2QUJ_KywudwEGOcLVKVv0C2gh_dJhKNx7FV5iFQQ=s120-c-rp-mo-br100"
     },
@@ -892,7 +892,7 @@
       "author_name": "Frazer Horn",
       "rating": 5,
       "text": "Wow, BBQ looks like new. Great service, on time. I highly recommend Aspect BBQ cleaning.",
-      "relative_time_description": "2 months ago",
+      "relative_time_description": "3 months ago",
       "publish_time": "2026-05-25T14:04:10.943289Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUCGf_b9c8-bYZLuNyivhMx05dYoeCqL6PRRjS390AXp68p0aIY=s120-c-rp-mo-br100"
     },
@@ -3276,7 +3276,7 @@
       "author_name": "Diana Patterson",
       "rating": 5,
       "text": "The on line booking was very easy. Hiro was on time & spent over 4 hours cleaning my BBQ. I’m very happy with the service.",
-      "relative_time_description": "a year ago",
+      "relative_time_description": "2 years ago",
       "publish_time": "2024-08-23T15:19:09.869559Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjX9lUjBvq9a3t2ypurJWbjGGfNHKnojNly3KNTaXCIKaVo5Ae3i=s120-c-rp-mo-br100"
     },
@@ -4259,5 +4259,5 @@
   ],
   "overall_rating": 4.9,
   "total_ratings": 577,
-  "fetched_at": "2026-08-23T11:10:43.621807"
+  "fetched_at": "2026-08-24T11:16:28.159448"
 }
