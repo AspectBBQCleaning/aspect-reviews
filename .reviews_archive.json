@@ -636,7 +636,7 @@
       "author_name": "Allen Turner",
       "rating": 5,
       "text": "The service was great and Fayez did a great job.",
-      "relative_time_description": "2 months ago",
+      "relative_time_description": "3 months ago",
       "publish_time": "2026-06-12T18:43:53.199312Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKIfdGXU8bxsRr1Fi1fZmTaW-BOv8YQ2tMFZI9NDIYkYFIdHw=s120-c-rp-mo-br100"
     },
@@ -644,7 +644,7 @@
       "author_name": "Paolo Cirone",
       "rating": 5,
       "text": "Fayez was exceptional. Thank you!",
-      "relative_time_description": "2 months ago",
+      "relative_time_description": "3 months ago",
       "publish_time": "2026-06-12T16:03:53.605310Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXOnSzOVd8_unrD2zm7F03IuLB1v2UC7GH4GC4EU3G1DDVPL9uo=s120-c-rp-mo-br100"
     },
@@ -980,7 +980,7 @@
       "author_name": "Kirsten Hoedlmoser",
       "rating": 5,
       "text": "Fayez did a great job cleaning our bbq. It looks practically new. Our yard was left clean and tidy after he was done, and the service was completed within the estimated time. Will be recommending their services to our local friends.",
-      "relative_time_description": "3 months ago",
+      "relative_time_description": "4 months ago",
       "publish_time": "2026-05-13T15:46:13.431849Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLagAXQVlNN9hdJzmdePHQK3qYJudch6rG4L3pf4_OCq9qylhfY=s120-c-rp-mo-br100"
     },
@@ -1100,7 +1100,7 @@
       "author_name": "Marian Naskret",
       "rating": 5,
       "text": "Erik did a great service; exceptional knowledge and behavior.\nI recommended him to any job.",
-      "relative_time_description": "12 months ago",
+      "relative_time_description": "a year ago",
       "publish_time": "2025-09-10T23:26:41.302527Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKD5EnVIMXpDjB3H1-l7Z2qYzfDDW5kz7vI7oN6zjVwuX5-0A=s120-c-rp-mo-br100"
     },
@@ -4259,5 +4259,5 @@
   ],
   "overall_rating": 4.9,
   "total_ratings": 578,
-  "fetched_at": "2026-09-10T14:41:00.538116"
+  "fetched_at": "2026-09-11T14:39:57.832193"
 }
