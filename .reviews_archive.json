@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "author_name": "Trevor Page",
+      "rating": 5,
+      "text": "Jacob did a fantastic job with the BBQ cleaning. He went above and beyond with the service. I'm very happy with how clean it is now, and Jacob pointed out how bad the flow was for my gas, so it'll run much more efficiently now. He even helped me with an issue I was having with mice getting into the BBQ.\n\nHighly recommend him.",
+      "relative_time_description": "a day ago",
+      "publish_time": "2026-10-16T16:14:54.891635Z",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVD2COHFnnX5-jsNFgKbOFYHWZZIMgNfhlVRx2WBBIkW1c-vK1d=s120-c-rp-mo-ba12-br100"
+    },
+    {
       "author_name": "CNB8590cA",
       "rating": 5,
       "text": "Jacob did an amazing job on my 7-year old Napoleon bbq. He arrived on time, and worked quietly and efficiently. When he had finished he showed me precisely what he had done, and gave me some good advice about keeping the bbq clean in future. He is polite, and hard-working , and is building a great business. I highly recommend Aspect BBQ Cleaning.",
@@ -964,7 +972,7 @@
       "author_name": "Nick Ramdhan",
       "rating": 5,
       "text": "Very happy with the service, you did an amazing job!!!",
-      "relative_time_description": "4 months ago",
+      "relative_time_description": "5 months ago",
       "publish_time": "2026-05-20T01:22:33.148160Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJxYB1bmgVpqij4owDrFdBn-yAgqgphyU6wSmt2veOgi6dkaA=s120-c-rp-mo-br100"
     },
@@ -972,7 +980,7 @@
       "author_name": "Ray Wood",
       "rating": 5,
       "text": "Scott from Aspect BBQ Cleaning came to our trailer to do the cleaning. Very pleased with his work. . He did an excellent job and Also a Nice polite young man would recommend him anytime.",
-      "relative_time_description": "4 months ago",
+      "relative_time_description": "5 months ago",
       "publish_time": "2026-05-19T19:01:33.449131Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKVsfySK3gy1CUxPaL5ygghKbb_55uYnfFw5157hRtm7wvrFNM=s120-c-rp-mo-br100"
     },
@@ -980,7 +988,7 @@
       "author_name": "Rob Dwyer",
       "rating": 5,
       "text": "The service technician did ab unbelievable job. I highly recommend this company",
-      "relative_time_description": "4 months ago",
+      "relative_time_description": "5 months ago",
       "publish_time": "2026-05-19T18:11:24.048267Z",
       "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocKTUXaAySJ4U6Zm0O3yl0tSS3_-RgzOknAU1v87lko01meV5w=s120-c-rp-mo-br100"
     },
@@ -4274,6 +4282,6 @@
     }
   ],
   "overall_rating": 4.9,
-  "total_ratings": 580,
-  "fetched_at": "2026-10-16T15:02:58.501409"
+  "total_ratings": 581,
+  "fetched_at": "2026-10-17T13:58:48.661229"
 }
